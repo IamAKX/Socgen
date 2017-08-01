@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.akash.applications.socgen.VideoActivity">
+<FrameLayout
+    android:id="@+id/videoview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/bottomRelative"/>
+
+    <TextView
+    android:id="@+id/timePrompt"
+    android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Total 15 seconds"/>
+
+    <RelativeLayout
+    android:id="@+id/pregressrelative"
+    android:layout_marginTop="5dp"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/timePrompt"
+    android:layout_width="wrap_content"
+    android:padding="2dp"
+    android:background="@drawable/progressbar_border"
+    android:layout_height="wrap_content">
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+    android:id="@+id/number_progress_bar"
+    style="@style/NumberProgressBar_Default"
+    android:layout_width="300dp"
+    app:progress_current="40"
+    app:progress_text_color="@color/ms_white"
+    app:progress_unreached_color="@android:color/transparent"
+    app:progress_reached_color="@color/nextbtn"
+    app:progress_unreached_bar_height="15dp"
+    app:progress_reached_bar_height="15dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+    android:id="@+id/relativeSurfaceView"
+    android:layout_marginTop="20dp"
+    android:layout_below="@+id/pregressrelative"
+    android:layout_centerHorizontal="true"
+    android:layout_width="300dp"
+
+    android:layout_height="250dp">
+
+
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_width="15dp"
+    android:layout_height="3dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_width="15dp"
+    android:layout_height="3dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_width="15dp"
+    android:layout_height="3dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_width="15dp"
+    android:layout_height="3dp"
+    android:background="@color/uncompleteLine"/>
+
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_width="3dp"
+    android:layout_height="15dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_width="3dp"
+    android:layout_height="15dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_width="3dp"
+    android:layout_height="15dp"
+    android:background="@color/uncompleteLine"/>
+
+    <TextView
+    android:layout_margin="5dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_width="3dp"
+    android:layout_height="15dp"
+    android:background="@color/uncompleteLine"/>
+    <!--<ImageView-->
+    <!--android:padding="25dp"-->
+    <!--android:src="@drawable/faceborder"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
+    </RelativeLayout>
+    <ProgressBar
+        android:layout_above="@+id/bottomRelative"
+        android:id="@+id/speacRecogProgress"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+    <LinearLayout
+        android:id="@+id/bottomRelative"
+    android:layout_alignParentBottom="true"
+    android:gravity="center"
+    android:background="@color/colorAccent"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+        <TextView
+
+        android:textSize="14sp"
+        android:text="Read this number"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/randomtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="102938"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <ImageButton
+        android:padding="2dp"
+        android:background="@android:color/transparent"
+        android:id="@+id/btnRecVideo"
+        android:src="@drawable/circlebutton"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

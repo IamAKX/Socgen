@@ -1,0 +1,170 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@android:color/white"
+    tools:context="com.akash.applications.socgen.RegFragments.CaptureID">
+
+    <LinearLayout
+        android:id="@+id/previewLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/frontPreview"
+            android:layout_width="120dp"
+            android:layout_height="80dp" />
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/backPreview"
+            android:layout_width="120dp"
+            android:layout_height="80dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/previewLayout"
+        android:id="@+id/previewLabellayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:weightSum="2">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/frontLabel"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Front View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/backLabel"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text= "Back View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    <RelativeLayout
+        android:background="@drawable/surfaceview_outer_border"
+        android:layout_below="@+id/previewLabellayout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:padding="5dp"
+        android:id="@+id/btnRec">
+
+        <TextView
+            android:textSize="18sp"
+            android:text="Tap to capture front view your \ngovt. approved ID card"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:gravity="center"
+            android:padding="20dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold|italic"
+            android:id="@+id/IDdoneprompt"
+            android:text="Front and back view of your document are captured successfully!"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="15dp"
+                android:layout_height="3dp"
+                android:background="@color/angleframe"/>
+
+
+            <TextView
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="3dp"
+                android:layout_height="15dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="3dp"
+                android:layout_height="15dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="3dp"
+                android:layout_height="15dp"
+                android:background="@color/angleframe"/>
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="3dp"
+                android:layout_height="15dp"
+                android:background="@color/angleframe"/>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <!--<Button-->
+
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:id="@+id/btnExtract"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:text="NEXT"-->
+        <!--android:textSize="20dp"-->
+        <!--android:background="@color/deactiveButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+</RelativeLayout>

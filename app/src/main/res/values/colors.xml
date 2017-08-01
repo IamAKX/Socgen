@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#c7c7c7</color>
+    <color name="colorAccent">#3D3D3E</color>
+
+    <color name="deactiveButton">#A0A09F</color>
+    <color name="angleframe">#909596</color>
+    <color name="nextbtn">#3D3D3E</color>
+    <color name="uncompleteLine">#dddddd</color>
+    <color name="completeLine">#adadad</color>
+    <color name="lowerBackground">#F6F7F7</color>
+    <color name="social_media_button_background">#979797</color>
+</resources>

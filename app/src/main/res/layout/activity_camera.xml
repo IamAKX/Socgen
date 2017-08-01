@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.akash.applications.socgen.CameraActivity">
+
+
+
+    <RelativeLayout
+        android:layout_above="@+id/bottomRelative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:background="@drawable/surfaceview_outer_border"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomRelative"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <ImageButton
+            android:id="@+id/btnTackePic"
+            android:src="@drawable/camera"
+            android:tint="@color/colorAccent"
+            android:background="@drawable/circlebutton"
+            android:layout_width="55dp"
+            android:layout_height="55dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

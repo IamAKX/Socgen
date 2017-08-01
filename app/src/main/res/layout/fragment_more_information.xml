@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="com.akash.applications.socgen.RegFragments.MoreInformation">
+
+
+    <Spinner
+        android:id="@+id/spinnerSourceOfIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/completeLine"
+        android:layout_marginBottom="30dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerSelectAc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/completeLine"
+        android:layout_marginBottom="30dp"/>
+
+    <TextView
+        android:text="Card Type"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <RadioGroup
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:id="@+id/radiogroupCardType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:checked="true"
+                android:text="Credit Card"
+                android:layout_weight="1"
+                android:id="@+id/creditRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:text="Debit Card"
+                android:layout_weight="1"
+                android:id="@+id/debitRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>
