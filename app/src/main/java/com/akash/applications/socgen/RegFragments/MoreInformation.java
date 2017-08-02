@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -44,6 +46,7 @@ import java.util.TimerTask;
 public class MoreInformation extends Fragment implements Step, RecognitionListener {
 
 
+    private String msg = null;
 
     public MoreInformation() {
         // Required empty public constructor
@@ -97,9 +100,10 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
 
         layers = new RelativeLayout[]
                 {
-                    getView().findViewById(R.id.layer3),
+                        getView().findViewById(R.id.layer1),
                     getView().findViewById(R.id.layer2),
-                    getView().findViewById(R.id.layer1)
+
+                        getView().findViewById(R.id.layer3)
                 };
 
 
@@ -129,6 +133,15 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
         {
             radioArray[i][j].setText(model.getOptions()[j]);
         }
+        if(i==1)
+        {
+            radioArray[i][3].setVisibility(View.GONE);
+        }
+        else if(i==2)
+        {
+            radioArray[i][2].setVisibility(View.GONE);
+            radioArray[i][3].setVisibility(View.GONE);
+        }
     }
 
     private void setUpQuestion() {
@@ -151,44 +164,6 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
     public void onSelected() {
 
         MoreInfoQuestionModel model = modelArrayList.get(0);
-//
-//        Speech.getInstance().say("layer ", new TextToSpeechCallback() {
-//            @Override
-//            public void onStart() {
-//
-//            }
-//
-//            @Override
-//            public void onCompleted() {
-//                layers[CURRENT_LAYER-1].setVisibility(View.GONE);
-//                CURRENT_LAYER++;
-//                Log.e("checking"," "+CURRENT_LAYER);
-//            }
-//
-//            @Override
-//            public void onError() {
-//
-//            }
-//        });
-//
-//        Speech.getInstance().say("layer 3", new TextToSpeechCallback() {
-//            @Override
-//            public void onStart() {
-//
-//            }
-//
-//            @Override
-//            public void onCompleted() {
-//                layers[CURRENT_LAYER-1].setVisibility(View.GONE);
-//                CURRENT_LAYER++;
-//                Log.e("checking"," "+CURRENT_LAYER);
-//            }
-//
-//            @Override
-//            public void onError() {
-//
-//            }
-//        });
 
         Speech.getInstance().say("What is your "+model.getQuestion()+".  .  . "+model.getOptions()[0]+","+model.getOptions()[1]+","+model.getOptions()[2]+", or "+model.getOptions()[3], new TextToSpeechCallback() {
             @Override
@@ -198,8 +173,6 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
 
             @Override
             public void onCompleted() {
-                layers[CURRENT_LAYER-1].setVisibility(View.GONE);
-                CURRENT_LAYER++;
                 Log.e("checking"," end");
 
             }
@@ -279,7 +252,14 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
     @Override
     public void onError(int i) {
         String errorMessage = getErrorText(i);
-         Toast.makeText(getContext(),errorMessage,Toast.LENGTH_LONG).show();
+         //Toast.makeText(getContext(),errorMessage,Toast.LENGTH_LONG).show();
+        Speech.getInstance().say("Sorry, it is not an option. Speak again!");
+        try {
+            Thread.sleep(4000);
+            speech.startListening(recogizerIntent);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -290,16 +270,35 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
 //            res += s;
         Toast.makeText(getContext(), matches.get(0), Toast.LENGTH_LONG).show();
         if(res.equalsIgnoreCase(radioArray[CURRENT_LAYER-1][0].getText().toString()))
+        {
             radioArray[CURRENT_LAYER-1][0].setChecked(true);
+            CURRENT_LAYER++;
+            showNextQuestion();
+        }
         else
         if(res.equalsIgnoreCase(radioArray[CURRENT_LAYER-1][1].getText().toString()))
+        {
             radioArray[CURRENT_LAYER-1][1].setChecked(true);
+            CURRENT_LAYER++;
+            showNextQuestion();
+
+        }
         else
         if(res.equalsIgnoreCase(radioArray[CURRENT_LAYER-1][2].getText().toString()))
+        {
             radioArray[CURRENT_LAYER-1][2].setChecked(true);
+            CURRENT_LAYER++;
+            showNextQuestion();
+
+        }
         else
         if(res.equalsIgnoreCase(radioArray[CURRENT_LAYER-1][3].getText().toString()))
+        {
             radioArray[CURRENT_LAYER-1][3].setChecked(true);
+            CURRENT_LAYER++;
+            showNextQuestion();
+
+        }
         else {
             Speech.getInstance().say("Sorry, it is not an option. Speak again!");
             try {
@@ -311,6 +310,59 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
         }
 
         speechPB.setIndeterminate(false);
+
+    }
+
+    private void showNextQuestion() {
+        if(CURRENT_LAYER>3)
+            return;
+
+        layers[CURRENT_LAYER-2].setVisibility(View.GONE);
+        MoreInfoQuestionModel model = modelArrayList.get(CURRENT_LAYER-1);
+
+        if(CURRENT_LAYER==2)
+            msg = "What is your "+model.getQuestion()+".  .  . "+model.getOptions()[0]+","+model.getOptions()[1]+",or"+model.getOptions()[2]+""+model.getOptions()[3];
+        else if(CURRENT_LAYER==3)
+            msg = "What is your "+model.getQuestion()+".  .  . "+model.getOptions()[0]+", or "+model.getOptions()[1]+","+model.getOptions()[2]+""+model.getOptions()[3];
+        Speech.getInstance().say(msg, new TextToSpeechCallback() {
+            @Override
+            public void onStart() {
+                Log.e("checking"," start");
+            }
+
+            @Override
+            public void onCompleted() {
+                Log.e("checking"," end");
+
+            }
+
+            @Override
+            public void onError() {
+                Log.e("checking"," end");
+            }
+        });
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2500);
+                            Toast.makeText(getContext(),"Start Speaking",Toast.LENGTH_SHORT).show();
+                            speechPB.setVisibility(View.VISIBLE);
+                            speechPB.setIndeterminate(true);
+                            speech.startListening(recogizerIntent);
+                            Thread.sleep(1000);
+                            speech.stopListening();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        },1000);
 
     }
 
