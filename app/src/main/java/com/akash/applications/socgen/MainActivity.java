@@ -29,6 +29,7 @@ import java.util.Locale;
 
 public class MainActivity extends Activity {
 
+    public static TextToSpeech textToSpeech;
     MaterialEditText name, email,phone;
     ImageView logo;
     Context context;
@@ -47,7 +48,6 @@ public class MainActivity extends Activity {
         phone = (MaterialEditText) findViewById(R.id.mobileNo);
         logo = (ImageView) findViewById(R.id.logo);
         btn = (Button) findViewById(R.id.btnOpenAccount);
-
 
 
 //        Glide.with(context)

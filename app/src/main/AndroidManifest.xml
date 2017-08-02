@@ -10,6 +10,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".SpeechInit"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"

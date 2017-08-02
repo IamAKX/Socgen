@@ -98,7 +98,7 @@ public class CaptureID extends Fragment implements BlockingStep{
     @Override
     public void onSelected() {
 
-        Form.stepperLayout.setNextButtonEnabled(false);
+       // Form.stepperLayout.setNextButtonEnabled(false);
     }
 
     @Override

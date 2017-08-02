@@ -8,12 +8,13 @@
     tools:context="com.akash.applications.socgen.RegFragments.MoreInformation">
 
     <ProgressBar
+        android:background="@android:color/white"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:indeterminate="true"
         android:id="@+id/progressSpeech"
         android:layout_width="match_parent"
-        android:layout_height="2dp" />
+        android:layout_height="5dp" />
 
     <ScrollView
         android:scrollbars="none"
@@ -34,47 +35,182 @@
 
             </ListView>
 
-            <TextView
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="Question"
-                android:layout_marginTop="20sp"
-                android:id="@+id/moreInfoQuestion"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"/>
+                android:layout_height="match_parent">
 
-            <RadioGroup
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/radio1"
-                    android:text="Abc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radio2"
-                    android:text="Abc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radio3"
-                    android:text="Abc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radio4"
-                    android:text="Abc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-            </RadioGroup>
+
+                <!--Layer 3-->
+
+
+
+                <RelativeLayout
+                    android:background="@android:color/white"
+                    android:id="@+id/layer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:text="Question"
+                        android:layout_marginTop="20sp"
+                        android:id="@+id/moreInfoQuestionL3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"/>
+
+                    <RadioGroup
+                        android:layout_below="@+id/moreInfoQuestionL3"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radio1L3"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio2L3"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio3L3"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio4L3"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+
+
+                <!--Layer 2-->
+
+
+                <RelativeLayout
+                    android:background="@android:color/white"
+                    android:id="@+id/layer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:text="Question"
+                        android:layout_marginTop="20sp"
+                        android:id="@+id/moreInfoQuestionL2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"/>
+
+                    <RadioGroup
+                        android:layout_below="@+id/moreInfoQuestionL2"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radio1L2"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio2L2"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio3L2"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio4L2"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+
+
+
+
+                <!--Layer 2-->
+
+
+
+                <RelativeLayout
+                    android:background="@android:color/white"
+                    android:id="@+id/layer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:text="Question"
+                        android:layout_marginTop="20sp"
+                        android:id="@+id/moreInfoQuestionL1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"/>
+
+                    <RadioGroup
+                        android:layout_below="@+id/moreInfoQuestionL1"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radio1L1"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio2L1"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio3L1"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/radio4L1"
+                            android:text="Abc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 
