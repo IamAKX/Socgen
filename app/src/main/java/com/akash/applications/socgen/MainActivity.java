@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -23,6 +25,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -30,6 +33,7 @@ public class MainActivity extends Activity {
     ImageView logo;
     Context context;
     Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class MainActivity extends Activity {
         phone = (MaterialEditText) findViewById(R.id.mobileNo);
         logo = (ImageView) findViewById(R.id.logo);
         btn = (Button) findViewById(R.id.btnOpenAccount);
+
+
 
 //        Glide.with(context)
 //                .load(R.drawable.logo)
@@ -63,6 +69,7 @@ public class MainActivity extends Activity {
 
 
     }
+
 
     private void launchForm() {
         startActivity(new Intent(context,Form.class));

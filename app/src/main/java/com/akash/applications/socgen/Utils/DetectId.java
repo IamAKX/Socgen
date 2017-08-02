@@ -36,6 +36,12 @@ public class DetectId {
         frontdata.add("Dowód");
 
         backdata.add("81010200131");
+        backdata.add("PLACE OF BIRTH");
+        backdata.add("AUTHORITY");
+        backdata.add("<<<<");
+        backdata.add("EXPI");
+
+
     }
 
 
@@ -61,7 +67,7 @@ public class DetectId {
             TextBlock item = text.valueAt(i);
             if (item != null && item.getValue() != null) {
                 s+=item.getValue();
-                Log.i("unique naam",s+" ");
+                Log.i("unique naam",item.getValue()+" ");
 
             }
         }

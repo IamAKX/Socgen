@@ -31,6 +31,7 @@ import java.util.Locale;
  */
 public class VideoVerification extends Fragment implements Step{
 
+
     public static RelativeLayout agreementLayout;
     CheckBox agreeChkBox;
     Button agreeBtn;
@@ -73,7 +74,7 @@ public class VideoVerification extends Fragment implements Step{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), VideoActivity.class));
-                Form.textToSpeech.speak("Read this number",TextToSpeech.QUEUE_FLUSH,null,null);
+
             }
         });
         agreeBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.akash.applications.socgen;
 
 import android.app.Activity;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +13,11 @@ import com.akash.applications.socgen.RegFragments.CaptureID;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.io.File;
 import java.util.Locale;
 
 public class Form extends AppCompatActivity implements StepperLayout.StepperListener {
-    public static TextToSpeech textToSpeech;
+
     public static Activity activity;
     public static StepperLayout stepperLayout;
     @Override
@@ -23,20 +25,27 @@ public class Form extends AppCompatActivity implements StepperLayout.StepperList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         activity = this;
-        textToSpeech = new TextToSpeech(getBaseContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i != TextToSpeech.ERROR)
-                    textToSpeech.setLanguage(Locale.US);
-                else
-                    Log.e("checking","TTS ERROR CODE "+i);
-            }
-        });
+
+        createDir();
 
         stepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         stepperLayout.setAdapter(new FormStepperAdapter(getSupportFragmentManager(),this));
 
 
+    }
+
+    private void createDir() {
+        File dir = new File(Environment.getExternalStorageDirectory()+"/Socgen");
+        if(!dir.exists())
+            dir.mkdir();
+
+        dir = new File(Environment.getExternalStorageDirectory()+"/Socgen/Images");
+        if(!dir.exists())
+            dir.mkdir();
+
+        dir = new File(Environment.getExternalStorageDirectory()+"/Socgen/Videos");
+        if(!dir.exists())
+            dir.mkdir();
     }
 
     @Override

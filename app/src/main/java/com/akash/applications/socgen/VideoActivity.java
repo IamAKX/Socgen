@@ -9,6 +9,7 @@ import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akash.applications.socgen.RegFragments.VideoVerification;
+import com.akash.applications.socgen.Utils.CameraManager;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.daimajia.numberprogressbar.OnProgressBarListener;
 
@@ -41,6 +43,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 
     private static final int REQ_CODE_SPEECH_INPUT = 100;
 
+    TextToSpeech textToSpeech;
     SpeechRecognizer speech;
     Intent recogizerIntent;
     private ProgressBar speechPB;
@@ -52,6 +55,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
     SurfaceHolder surfaceHolder;
     boolean recording;
     Timer timer;
+    private int randomDigitGenerated = 0;
 
     /**
      * Called when the activity is first created.
@@ -80,16 +84,30 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
         myButton = (ImageButton) findViewById(R.id.btnRecVideo);
 
 
+        textToSpeech = new TextToSpeech(getBaseContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i != TextToSpeech.ERROR) {
+                    textToSpeech.setPitch(1.1f);
+                    textToSpeech.setLanguage(Locale.US);
+                }
+                else
+                    Log.e("checking","TTS ERROR CODE "+i);
+            }
+        });
+
+
         speechPB.setVisibility(View.INVISIBLE);
         numberProgressBar.setProgress(0);
         numberProgressBar.setMax(100);
         numberProgressBar.setOnProgressBarListener(this);
         Random r = new Random();
-        int i = r.nextInt(1000000);
+        randomDigitGenerated = r.nextInt(1000000);
 
 
-        TextView digitsTextView = (TextView) findViewById(R.id.randomtext);
-        digitsTextView.setText(String.valueOf(i));
+        digitsTextView = (TextView) findViewById(R.id.randomtext);
+        digitsTextView.setText("            ");
+
         speech = SpeechRecognizer.createSpeechRecognizer(getBaseContext());
 
         recogizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -104,6 +122,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 
     }
 
+    private TextView digitsTextView;
     Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener() {
 
         @Override
@@ -151,6 +170,11 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
                             public void run() {
                                 numberProgressBar.incrementProgressBy(6);
                                 sum+=6;
+                                if(sum==12)
+                                {
+                                    textToSpeech.speak("Read this number",TextToSpeech.QUEUE_FLUSH,null,null);
+                                    digitsTextView.setText(""+randomDigitGenerated);
+                                }
                                 if(sum>=90)
                                {
                                    // stop recording and release camera
@@ -171,7 +195,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 
                 },1000,1000);
                 speechPB.setIndeterminate(true);
-                speech.startListening(recogizerIntent);
+//                speech.startListening(recogizerIntent);
             }
         }
     };
@@ -224,7 +248,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 // TODO Auto-generated method stub
         Camera c = null;
         try {
-            c = Camera.open();
+            c = Camera.open(CameraManager.getFrontCamera());
 
             c.setDisplayOrientation(90);
             Camera.Parameters parameters = c.getParameters();
@@ -248,7 +272,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 
         mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
-        mediaRecorder.setOutputFile("/sdcard/myvideo" + System.currentTimeMillis() + ".mp4");
+        mediaRecorder.setOutputFile(Environment.getExternalStorageDirectory()+"/Socgen/Videos"+"/vid_" + System.currentTimeMillis() + ".mp4");
         mediaRecorder.setMaxDuration(15000); // Set max duration 15 sec.
         mediaRecorder.setMaxFileSize(500000000); // Set max file size 500MB
 

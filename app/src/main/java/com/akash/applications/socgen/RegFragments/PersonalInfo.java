@@ -49,7 +49,16 @@ public class PersonalInfo extends Fragment  implements Step{
         pAddress = getView().findViewById(R.id.parentaddress);
         pPostalCode = getView().findViewById(R.id.parentspostalcode);
 
-        setData();
+        //setData();
+
+        idCard.setText("ABC 123456");
+        pesel.setText("81010200131");
+        dob.setText("02.01.1981");
+        doe.setText("02.03.2005");
+        pob.setText("WARSZAWA");
+        pName.setText("KOWALASKI");
+        pAddress.setText("WARSZAWA");
+        pPostalCode.setText("321654");
     }
 
     private void setData() {

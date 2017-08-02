@@ -2,69 +2,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+
     android:orientation="vertical"
     android:background="@android:color/white"
     tools:context="com.akash.applications.socgen.RegFragments.MoreInformation">
 
-
-    <Spinner
-        android:id="@+id/spinnerSourceOfIncome"
+    <ProgressBar
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:indeterminate="true"
+        android:id="@+id/progressSpeech"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="2dp" />
 
-    <TextView
+    <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/completeLine"
-        android:layout_marginBottom="30dp"/>
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinnerSelectAc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/completeLine"
-        android:layout_marginBottom="30dp"/>
-
-    <TextView
-        android:text="Card Type"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <RadioGroup
-            android:weightSum="2"
-            android:orientation="horizontal"
-            android:id="@+id/radiogroupCardType"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <RadioButton
-                android:checked="true"
-                android:text="Credit Card"
-                android:layout_weight="1"
-                android:id="@+id/creditRadio"
+            <ListView
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/moreInfoList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:text="Debit Card"
-                android:layout_weight="1"
-                android:id="@+id/debitRadio"
+            </ListView>
+
+            <TextView
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Question"
+                android:layout_marginTop="20sp"
+                android:id="@+id/moreInfoQuestion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
 
-        </RadioGroup>
-    </LinearLayout>
+            <RadioGroup
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:text="Abc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:text="Abc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:text="Abc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radio4"
+                    android:text="Abc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

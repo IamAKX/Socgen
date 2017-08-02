@@ -1,8 +1,10 @@
 package com.akash.applications.socgen;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.akash.applications.socgen.RegFragments.CaptureID;
+import com.akash.applications.socgen.Utils.CameraManager;
 import com.akash.applications.socgen.Utils.DetectId;
 
 import java.io.FileNotFoundException;
@@ -59,7 +62,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         @Override
         public void onPictureTaken(byte[] bytes, Camera camera) {
             try {
-                String imgPath = "/sdcard/img_"+ System.currentTimeMillis()+".jpg";
+                String imgPath = Environment.getExternalStorageDirectory()+"/Socgen/Images"+"/img_"+ System.currentTimeMillis()+".jpg";
                 FileOutputStream f = new FileOutputStream(imgPath);
                 f.write(bytes);
                 f.close();
@@ -72,9 +75,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         CaptureID.isFronSet = true;
                         CaptureID.frontImgPath = imgPath;
                         CaptureID.frontLebel.setVisibility(View.VISIBLE);
-                        camera.stopPreview();
-                        camera.release();
-                        camera= null;
+//                        camera.stopPreview();
+//                        camera.release();
+//                        camera= null;
                         camCondition = false;
                         finish();
                         break;
@@ -84,9 +87,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         CaptureID.isBackSet=true;
                         CaptureID.backImgPath = imgPath;
                         CaptureID.backLebel.setVisibility(View.VISIBLE);
-                        camera.stopPreview();
-                        camera.release();
-                        camera= null;
+//                        camera.stopPreview();
+//                        camera.release();
+//                        camera= null;
                         camCondition = false;
                         finish();
                         break;
@@ -102,10 +105,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 {
                     if(camera!=null)
                     {
-                        camera.stopPreview();
-                        camera.release();
-                        camera= null;
-                        camCondition = false;
+//                        camera.stopPreview();
+//                        camera.release();
+//                        camera= null;
+//                        camCondition = false;
                     }
                     Form.stepperLayout.setNextButtonEnabled(true);
 
@@ -136,8 +139,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        camera = Camera.open();
-     //   camera.setDisplayOrientation(90);
+        camera = Camera.open(CameraManager.getBackCamera());
+        camera.setDisplayOrientation(90);
         Camera.Parameters parameters = camera.getParameters();
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         camera.setParameters(parameters);
@@ -172,6 +175,34 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 parameters.setPreviewSize(size.width, size.height);
 
                 parameters.setColorEffect(Camera.Parameters.EFFECT_NONE);
+
+//                String currentversion = android.os.Build.VERSION.SDK;
+//                int currentInt = android.os.Build.VERSION.SDK_INT;
+//
+//                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                    if (currentInt != 7) {
+//                        camera.setDisplayOrientation(90);
+//                    } else {
+//                        Log.d("System out", "Portrait " + currentInt);
+//
+//                        parameters.setRotation(90);
+//
+//
+//                        camera.setParameters(parameters);
+//                    }
+//                }
+//                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//                    // camera.setDisplayOrientation(0);
+//                    if (currentInt != 7) {
+//                        camera.setDisplayOrientation(0);
+//                    } else {
+//                        Log.d("System out", "Landscape " + currentInt);
+//                        parameters.set("orientation", "landscape");
+//                        parameters.set("rotation", 90);
+//                        camera.setParameters(parameters);
+//                    }
+//                }
+
                 camera.setParameters(parameters);
                 camera.setPreviewDisplay(surfaceHolder);
                 camera.startPreview();
@@ -184,10 +215,12 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        camera.stopPreview();
-        camera.release();
-        camera= null;
-        camCondition = false;
+        if(camera!=null) {
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+        }
+            camCondition = false;
     }
 
 
