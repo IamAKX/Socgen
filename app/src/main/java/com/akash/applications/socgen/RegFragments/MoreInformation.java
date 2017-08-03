@@ -367,7 +367,8 @@ public class MoreInformation extends Fragment implements Step, RecognitionListen
     }
 
     @Override
-    public void onPartialResults(Bundle bundle) {
+    public void onPartialResults(Bundle bundle)
+    {
 
     }
 

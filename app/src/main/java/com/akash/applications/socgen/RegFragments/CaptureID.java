@@ -49,6 +49,7 @@ import java.util.Map;
 
 public class CaptureID extends Fragment implements BlockingStep{
     //public static Button btnExtract;
+
     RelativeLayout btnRec;
     public static TextView frontLebel, backLebel;
     public static ImageView frontPreview, backPreview;
@@ -78,6 +79,7 @@ public class CaptureID extends Fragment implements BlockingStep{
         frontLebel = getView().findViewById(R.id.frontLabel);
         backLebel = getView().findViewById(R.id.backLabel);
         btnRec = (RelativeLayout) getView().findViewById(R.id.btnRec);
+
 
         btnRec.setOnClickListener(new View.OnClickListener() {
             @Override

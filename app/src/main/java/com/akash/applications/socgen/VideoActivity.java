@@ -28,10 +28,22 @@ import android.widget.Toast;
 
 import com.akash.applications.socgen.RegFragments.VideoVerification;
 import com.akash.applications.socgen.Utils.CameraManager;
+import com.akash.applications.socgen.Utils.MyConstants;
+import com.akash.applications.socgen.Utils.SnapShot;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.daimajia.numberprogressbar.OnProgressBarListener;
 
+import net.gotev.speech.Speech;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,8 +54,8 @@ import java.util.TimerTask;
 public class VideoActivity extends Activity implements RecognitionListener, OnProgressBarListener {
 
     private static final int REQ_CODE_SPEECH_INPUT = 100;
-
-    TextToSpeech textToSpeech;
+    String videoPath = MyConstants.CURRENT_ACCOUNT_FOLDER+"/vid_" + System.currentTimeMillis() + ".mp4";
+//    TextToSpeech textToSpeech;
     SpeechRecognizer speech;
     Intent recogizerIntent;
     private ProgressBar speechPB;
@@ -83,19 +95,19 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
         speechPB = findViewById(R.id.speacRecogProgress);
         myButton = (ImageButton) findViewById(R.id.btnRecVideo);
 
-
-        textToSpeech = new TextToSpeech(getBaseContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i != TextToSpeech.ERROR) {
-                    textToSpeech.setPitch(1.1f);
-                    textToSpeech.setLanguage(Locale.US);
-                }
-                else
-                    Log.e("checking","TTS ERROR CODE "+i);
-            }
-        });
-
+//
+//        textToSpeech = new TextToSpeech(getBaseContext(), new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int i) {
+//                if (i != TextToSpeech.ERROR) {
+//                    textToSpeech.setPitch(1.1f);
+//                    textToSpeech.setLanguage(Locale.US);
+//                }
+//                else
+//                    Log.e("checking","TTS ERROR CODE "+i);
+//            }
+//        });
+//
 
         speechPB.setVisibility(View.INVISIBLE);
         numberProgressBar.setProgress(0);
@@ -168,14 +180,14 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                numberProgressBar.incrementProgressBy(6);
-                                sum+=6;
-                                if(sum==12)
+                                numberProgressBar.incrementProgressBy(14);
+                                sum+=14;
+                                if(sum==28)
                                 {
-                                    textToSpeech.speak("Read this number",TextToSpeech.QUEUE_FLUSH,null,null);
+                                    Speech.getInstance().say("Read this number");
                                     digitsTextView.setText(""+randomDigitGenerated);
                                 }
-                                if(sum>=90)
+                                if(sum>=98)
                                {
                                    // stop recording and release camera
                                    if(recording) {
@@ -186,7 +198,16 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
                                    speech.destroy();
                                    //Exit after saved
                                    VideoVerification.agreementLayout.setVisibility(View.VISIBLE);
-                                   finish();
+
+                                   File video = new File(videoPath);
+                                   File videoCopy = new File(MyConstants.CURRENT_ACCOUNT_FOLDER+"/vid_copy.mp4");
+                                   File audio = new File(MyConstants.CURRENT_ACCOUNT_FOLDER+"/audio.mp3");
+
+                                    copyVideoFile(video,videoCopy);
+                                    videoCopy.renameTo(audio);
+                                   //SnapShot.saveScreenShot(Form.activity,videoPath,5000);  // Take 1 screen shots
+                                   SnapShot.saveScreenShot(Form.activity,videoPath,new int[]{2000,4000,6000});
+                                    finish();
 
                                 }
                             }
@@ -199,6 +220,26 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
             }
         }
     };
+
+    private void copyVideoFile(File video, File videoCopy) {
+        InputStream is = null;
+        OutputStream os = null;
+        try
+        {
+            is = new FileInputStream(video);
+            os = new FileOutputStream(videoCopy);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer))>0)
+            {
+                os.write(buffer,0,length);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //
 //    private void startlistening() {
 //        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -261,6 +302,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
     }
 
     private boolean prepareMediaRecorder() {
+
         myCamera = getCameraInstance();
         mediaRecorder = new MediaRecorder();
 
@@ -270,10 +312,10 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+        mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
 
-        mediaRecorder.setOutputFile(Environment.getExternalStorageDirectory()+"/Socgen/Videos"+"/vid_" + System.currentTimeMillis() + ".mp4");
-        mediaRecorder.setMaxDuration(15000); // Set max duration 15 sec.
+        mediaRecorder.setOutputFile(videoPath);
+        mediaRecorder.setMaxDuration(7000); // Set max duration 15 sec.
         mediaRecorder.setMaxFileSize(500000000); // Set max file size 500MB
 
         mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
@@ -408,7 +450,7 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
 
     @Override
     public void onProgressChange(int current, int max) {
-        if(current>=90)
+        if(current>=98)
             numberProgressBar.setProgress(max);
     }
 

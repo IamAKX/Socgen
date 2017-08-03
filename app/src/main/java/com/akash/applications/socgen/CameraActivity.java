@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.akash.applications.socgen.RegFragments.CaptureID;
 import com.akash.applications.socgen.Utils.CameraManager;
 import com.akash.applications.socgen.Utils.DetectId;
+import com.akash.applications.socgen.Utils.MyConstants;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -62,7 +63,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         @Override
         public void onPictureTaken(byte[] bytes, Camera camera) {
             try {
-                String imgPath = Environment.getExternalStorageDirectory()+"/Socgen/Images"+"/img_"+ System.currentTimeMillis()+".jpg";
+                String imgPath = MyConstants.CURRENT_ACCOUNT_FOLDER+"/img_"+ System.currentTimeMillis()+".jpg";
                 FileOutputStream f = new FileOutputStream(imgPath);
                 f.write(bytes);
                 f.close();

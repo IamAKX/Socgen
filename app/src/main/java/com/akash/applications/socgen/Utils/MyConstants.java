@@ -6,4 +6,5 @@ package com.akash.applications.socgen.Utils;
 
 public class MyConstants {
     public static final String CURRENT_STEP_POSITION_KEY = "tabpos";
+    public static String CURRENT_ACCOUNT_FOLDER = "";
 }

@@ -2,6 +2,7 @@ package com.akash.applications.socgen;
 
 import android.app.Activity;
 import android.os.Environment;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 
 import com.akash.applications.socgen.Adapter.FormStepperAdapter;
 import com.akash.applications.socgen.RegFragments.CaptureID;
+import com.akash.applications.socgen.Utils.MyConstants;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
@@ -39,13 +41,12 @@ public class Form extends AppCompatActivity implements StepperLayout.StepperList
         if(!dir.exists())
             dir.mkdir();
 
-        dir = new File(Environment.getExternalStorageDirectory()+"/Socgen/Images");
+        MyConstants.CURRENT_ACCOUNT_FOLDER = Environment.getExternalStorageDirectory()+"/Socgen/"+ System.currentTimeMillis();
+
+        dir = new File(MyConstants.CURRENT_ACCOUNT_FOLDER);
         if(!dir.exists())
             dir.mkdir();
 
-        dir = new File(Environment.getExternalStorageDirectory()+"/Socgen/Videos");
-        if(!dir.exists())
-            dir.mkdir();
     }
 
     @Override
