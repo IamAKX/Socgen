@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.akash.applications.socgen.RegFragments.CaptureID;
 import com.akash.applications.socgen.RegFragments.MoreInformation;
+import com.akash.applications.socgen.RegFragments.MoreInformationSL;
 import com.akash.applications.socgen.RegFragments.PersonalInfo;
 import com.akash.applications.socgen.RegFragments.VideoVerification;
 import com.akash.applications.socgen.Utils.MyConstants;
@@ -45,7 +46,7 @@ public class FormStepperAdapter extends AbstractFragmentStepAdapter {
                 return personalInfo;
 
             case 2:
-                final MoreInformation moreInformation = new MoreInformation();
+                final MoreInformationSL moreInformation = new MoreInformationSL();
                 b = new Bundle();
                 b.putInt(MyConstants.CURRENT_STEP_POSITION_KEY,position);
                 moreInformation.setArguments(b);

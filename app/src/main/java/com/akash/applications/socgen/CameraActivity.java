@@ -1,10 +1,13 @@
 package com.akash.applications.socgen;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -79,8 +83,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 //                        camera.stopPreview();
 //                        camera.release();
 //                        camera= null;
+                        showAlert("Front");
                         camCondition = false;
-                        finish();
+
                         break;
 
                     case "back":
@@ -91,8 +96,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 //                        camera.stopPreview();
 //                        camera.release();
 //                        camera= null;
+                        showAlert("Back");
                         camCondition = false;
-                        finish();
+
                         break;
 
                     default:
@@ -126,6 +132,20 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
         }
     };
+
+    private void showAlert(String S) {
+        final AlertDialog.Builder builder =new AlertDialog.Builder(CameraActivity.this);
+        builder.setMessage(S+ "view captured");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                finish();
+            }
+        });
+        builder.setCancelable(false);
+        builder.create().show();
+    }
 
     @Override
     public void onDestroy() {

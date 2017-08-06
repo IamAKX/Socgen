@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,6 +31,7 @@ import com.akash.applications.socgen.RegFragments.VideoVerification;
 import com.akash.applications.socgen.Utils.CameraManager;
 import com.akash.applications.socgen.Utils.MyConstants;
 import com.akash.applications.socgen.Utils.SnapShot;
+import com.akash.applications.socgen.Utils.VideoUploader;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.daimajia.numberprogressbar.OnProgressBarListener;
 
@@ -45,8 +47,10 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -206,8 +210,11 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
                                     copyVideoFile(video,videoCopy);
                                     videoCopy.renameTo(audio);
                                    //SnapShot.saveScreenShot(Form.activity,videoPath,5000);  // Take 1 screen shots
-                                   SnapShot.saveScreenShot(Form.activity,videoPath,new int[]{2000,4000,6000});
-                                    finish();
+                                   //SnapShot.saveScreenShot(Form.activity,videoPath,new int[]{2000,4000,6000});
+
+//                                   new Uploader().execute();
+
+                                   finish();
 
                                 }
                             }
@@ -535,6 +542,21 @@ public class VideoActivity extends Activity implements RecognitionListener, OnPr
         public void surfaceDestroyed(SurfaceHolder holder) {
             // TODO Auto-generated method stub
 
+        }
+    }
+
+    private class Uploader extends AsyncTask<String,String,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            Map<String, String> params = new HashMap<String, String>(2);
+//            params.put("foo", hash);  //Yaha params dalna
+//            params.put("bar", caption);
+
+            //yha respective fields dalna
+            //String result = VideoUploader.multipartRequest(URL_UPLOAD_VIDEO, params, pathToVideoFile, "video", "video/mp4");
+
+
+            return null;
         }
     }
 }
